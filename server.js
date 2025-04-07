@@ -1,6 +1,8 @@
 const express = require('express');
 const mariadb = require('mariadb');
 const cors = require('cors');
+const ModbusRTU = require("modbus-serial");
+const client = new ModbusRTU();
 
 const app = express();
 const port = 3000;
@@ -31,6 +33,45 @@ const testConnection = async () => {
 };
 
 testConnection();
+
+
+// Lecture cyclique des variables depuis l'automate
+async function scheduleVariableTracking() {
+  try {
+    const conn = await db.getConnection();
+    const variables = await conn.query("SELECT * FROM variable");
+
+    for (const variable of variables) {
+      const { id_mesure, Adresse_Mot, IP, Fréquence } = variable;
+
+      setInterval(async () => {
+        try {
+          await client.connectTCP(IP, { port: 502 }); // à changer parce que c'est pas le bon 
+          client.setID(1); // à adapter si nécessaire
+
+          const data = await client.readHoldingRegisters(parseInt(Adresse_Mot), 1);
+          const valeur = data.data[0];
+
+          const now = new Date();
+          await conn.query(
+            'INSERT INTO variable (date_heure, temp, cycle) VALUES (?, ?, ?)',
+            [now, valeur, null] // cycle peut être remplacé si tu veux mettre autre chose
+          );
+
+          console.log(`[${now.toISOString()}] Valeur lue depuis ${IP} @${Adresse_Mot} : ${valeur}`);
+        } catch (error) {
+          console.error(`Erreur de lecture pour ${IP} @${Adresse_Mot} :`, error.message);
+        }
+      }, Fréquence * 1000); // Fréquence en secondes
+    }
+
+    conn.release();
+  } catch (error) {
+    console.error("Erreur pendant l'initialisation du suivi des variables :", error.message);
+  }
+}
+scheduleVariableTracking();
+
 
 // ======================== ALARME ========================
 app.post('/alarme', async (req, res) => {
@@ -186,3 +227,4 @@ app.get('/variable', async (req, res) => {
 app.listen(port, () => {
   console.log(` Serveur en ligne sur http://localhost:${port}`);
 });
+
