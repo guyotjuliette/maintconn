@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Température</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: #E5B8C7;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .burger-menu button {
+      background-color: white;
+      color: #F5D6E0;
+      border: 1px solid #F5D6E0;
+      padding: 10px;
+      font-size: 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .burger-menu button:hover {
+      background-color: #E5B8C7;
+      color: white;
+    }
+
+    #burger-menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 10px;
+      background-color: #F5D6E0;
+      border: 1px solid #E5B8C7;
+      padding: 10px;
+      z-index: 1000;
+    }
+
+    #burger-menu a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 5px;
+    }
+
+    #burger-menu a:hover {
+      background-color: #E5B8C7;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .chart-container {
+      width: 80%;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #eee;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <div class="burger-menu">
+      <button id="burger-button">☰</button>
+      <div id="burger-menu">
+        <a href="config.html">Config</a>
+        <a href="historique.html">Historique</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h1>Température reçue du capteur</h1>
+
+    <div class="chart-container">
+      <canvas id="chart"></canvas>
+    </div>
+
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Date/Heure</th>
+          <th>Température (°C)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <script>
+    document.getElementById("burger-button").addEventListener("click", () => {
+      const menu = document.getElementById("burger-menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    });
+
+    async function fetchData() {
+      try {
+        const response = await fetch('http://localhost:3000/variable');
+        const data = await response.json();
+
+        const labels = [];
+        const values = [];
+        const tbody = document.querySelector('#data-table tbody');
+        tbody.innerHTML = '';
+
+        data.forEach(entry => {
+          const date = new Date(entry.date_heure).toLocaleString();
+          const temp = entry.temp;
+
+          // pour le tableau
+          const tr = document.createElement('tr');
+          const tdDate = document.createElement('td');
+          const tdTemp = document.createElement('td');
+          tdDate.textContent = date;
+          tdTemp.textContent = temp;
+          tr.appendChild(tdDate);
+          tr.appendChild(tdTemp);
+          tbody.appendChild(tr);
+
+          // pour le graphique
+          labels.push(date);
+          values.push(temp);
+        });
+
+        const ctx = document.getElementById('chart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels.reverse(),
+            datasets: [{
+              label: 'Température (°C)',
+              data: values.reverse(),
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 2,
+              fill: false,
+              tension: 0.1
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: {
+                title: { display: true, text: 'Date/Heure' }
+              },
+              y: {
+                title: { display: true, text: 'Température (°C)' },
+                beginAtZero: false
+              }
+            }
+          }
+        });
+
+      } catch (err) {
+        console.error('Erreur récupération des données :', err.message);
+      }
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>
