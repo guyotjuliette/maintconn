@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Température Zone 3</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      height: 100vh;
+      padding-top: 40px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 50px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .temp {
+      font-size: 5em;
+      font-weight: bold;
+      color: #00ffd5;
+      transition: color 0.3s ease;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 1.2em;
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 1em;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+
+    form button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #00ffd5;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #00c9a7;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.8em;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contrôle température - Zone 3</h1>
+
+  <div class="card">
+    <div id="temperature" class="temp">-- °C</div>
+    <div id="status" class="status">En attente des données...</div>
+  </div>
+
+  <form id="seuilForm">
+    <label>Seuil très bas :
+      <input type="number" name="tres_bas" required />
+    </label>
+    <label>Seuil bas :
+      <input type="number" name="bas" required />
+    </label>
+    <label>Seuil haut :
+      <input type="number" name="haut" required />
+    </label>
+    <label>Seuil très haut :
+      <input type="number" name="tres_haut" required />
+    </label>
+    <button type="submit">Mettre à jour les seuils</button>
+  </form>
+
+  <footer>Dashboard by Node-RED ♥</footer>
+
+  <script>
+    async function updateTemp() {
+      try {
+        const response = await fetch("http://172.16.0.31:1880/temperatureZone3");
+        const data = await response.json();
+        const temp = data.temperature ?? data;
+
+        const tempElem = document.getElementById("temperature");
+        const statusElem = document.getElementById("status");
+
+        tempElem.textContent = `${temp} °C`;
+
+        if (temp > 30) {
+          tempElem.style.color = "#ff4b5c";
+          statusElem.textContent = "🔥 Niveau critique !";
+        } else if (temp > 25) {
+          tempElem.style.color = "#ffa534";
+          statusElem.textContent = "⚠️ Attention : seuil élevé";
+        } else if (temp > 15 && temp < 25) {
+          tempElem.style.color = "#00ffd5";
+          statusElem.textContent = "✅ Température normale";
+        } else {
+          tempElem.style.color = "#69c0ff";
+          statusElem.textContent = "🌡️ Température basse";
+        }
+      } catch (error) {
+        document.getElementById("status").textContent = "Erreur de connexion avec Node-RED";
+      }
+    }
+
+    setInterval(updateTemp, 1000);
+    updateTemp();
+
+    async function chargerSeuils() {
+      const form = document.getElementById("seuilForm");
+      try {
+        const [tres_bas, bas, haut, tres_haut] = await Promise.all([
+          fetch("http://172.16.0.31:1880/getSeuilTresBas").then(r => r.json()),
+          fetch("http://172.16.0.31:1880/getSeuilBas").then(r => r.json()),
+          fetch("http://172.16.0.31:1880/getSeuilHaut").then(r => r.json()),
+          fetch("http://172.16.0.31:1880/getSeuilTresHaut").then(r => r.json())
+        ]);
+
+        form.tres_bas.value = tres_bas;
+        form.bas.value = bas;
+        form.haut.value = haut;
+        form.tres_haut.value = tres_haut;
+      } catch (e) {
+        alert("Erreur lors du chargement des seuils depuis l'automate.");
+      }
+    }
+
+    document.getElementById("seuilForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+
+      const seuils = {
+        tres_bas: parseInt(form.tres_bas.value),
+        bas: parseInt(form.bas.value),
+        haut: parseInt(form.haut.value),
+        tres_haut: parseInt(form.tres_haut.value)
+      };
+
+      try {
+        await Promise.all([
+          fetch("http://172.16.0.31:1880/updateSeuilTresBas", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ val: seuils.tres_bas })
+          }),
+          fetch("http://172.16.0.31:1880/updateSeuilBas", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ val: seuils.bas })
+          }),
+          fetch("http://172.16.0.31:1880/updateSeuilHaut", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ val: seuils.haut })
+          }),
+          fetch("http://172.16.0.31:1880/updateSeuilTresHaut", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ val: seuils.tres_haut })
+          })
+        ]);
+
+        alert("Seuils mis à jour avec succès !");
+      } catch (err) {
+        alert("Erreur lors de l'envoi des seuils !");
+      }
+    });
+
+    chargerSeuils();
+  </script>
+</body>
+</html>
