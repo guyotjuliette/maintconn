@@ -91,21 +91,6 @@
   </style>
 </head>
 <body>
-    <!-- Bouton de navigation (à placer juste après <body>) -->
-<div style="position: absolute; top: 20px; right: 30px;">
-    <button onclick="location.href='FrontEnd/dashboard.html'" style="
-      padding: 10px 20px;
-      background-color: #00ffd5;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    ">
-      ➜ Page Dashboard
-    </button>
-  </div>
   
   <h1>Contrôle température - Zone 3</h1>
 
@@ -130,17 +115,14 @@
     <button type="submit">Mettre à jour les seuils</button>
   </form>
 
-  <footer>Dashboard connecté au serveur Express</footer>
+  <footer>Dashboard by Node-RED ♥</footer>
 
   <script>
     async function updateTemp() {
       try {
-        const response = await fetch("http://localhost:3000/variable");
+        const response = await fetch("http://172.16.0.31:1880/temperatureZone3");
         const data = await response.json();
-
-        // suppose que la dernière température est la plus récente (premier élément)
-        const last = data[0];
-        const temp = last?.temp ?? "--";
+        const temp = data.temperature ?? data;
 
         const tempElem = document.getElementById("temperature");
         const statusElem = document.getElementById("status");
@@ -161,7 +143,7 @@
           statusElem.textContent = "🌡️ Température basse";
         }
       } catch (error) {
-        document.getElementById("status").textContent = "Erreur de connexion avec le serveur";
+        document.getElementById("status").textContent = "Erreur de connexion avec Node-RED";
       }
     }
 
@@ -172,10 +154,10 @@
       const form = document.getElementById("seuilForm");
       try {
         const [tres_bas, bas, haut, tres_haut] = await Promise.all([
-          fetch("http://localhost:3000/getSeuilTresBas").then(r => r.json()),
-          fetch("http://localhost:3000/getSeuilBas").then(r => r.json()),
-          fetch("http://localhost:3000/getSeuilHaut").then(r => r.json()),
-          fetch("http://localhost:3000/getSeuilTresHaut").then(r => r.json())
+          fetch("http://172.16.0.31:1880/getSeuilTresBas").then(r => r.json()),
+          fetch("http://172.16.0.31:1880/getSeuilBas").then(r => r.json()),
+          fetch("http://172.16.0.31:1880/getSeuilHaut").then(r => r.json()),
+          fetch("http://172.16.0.31:1880/getSeuilTresHaut").then(r => r.json())
         ]);
 
         form.tres_bas.value = tres_bas;
@@ -183,7 +165,7 @@
         form.haut.value = haut;
         form.tres_haut.value = tres_haut;
       } catch (e) {
-        alert("Erreur lors du chargement des seuils depuis le serveur.");
+        alert("Erreur lors du chargement des seuils depuis l'automate.");
       }
     }
 
@@ -200,22 +182,22 @@
 
       try {
         await Promise.all([
-          fetch("http://localhost:3000/updateSeuilTresBas", {
+          fetch("http://172.16.0.31:1880/updateSeuilTresBas", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ val: seuils.tres_bas })
           }),
-          fetch("http://localhost:3000/updateSeuilBas", {
+          fetch("http://172.16.0.31:1880/updateSeuilBas", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ val: seuils.bas })
           }),
-          fetch("http://localhost:3000/updateSeuilHaut", {
+          fetch("http://172.16.0.31:1880/updateSeuilHaut", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ val: seuils.haut })
           }),
-          fetch("http://localhost:3000/updateSeuilTresHaut", {
+          fetch("http://172.16.0.31:1880/updateSeuilTresHaut", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ val: seuils.tres_haut })

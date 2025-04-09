@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: nginx:latest
+    container_name: jtb-frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./FrontEnd:/usr/share/nginx/html
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - backend
+    networks:
+      - jtb-network
+
+  backend:
+    build:
+      context: ./BackEnd
+      dockerfile: Dockerfile
+    container_name: jtb-backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - ./BackEnd:/app
+    networks:
+      - jtb-network
+
+  db:
+    image: mariadb:latest
+    container_name: jtb-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: maintconn
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./bdd/bddtest.sql:/docker-entrypoint-initdb.d/bddtest.sql:ro
+      - db_data:/var/lib/mysql
+    command: --init-file /docker-entrypoint-initdb.d/bddtest.sql
+    networks:
+      - jtb-network
+
+volumes:
+  db_data:
+
+networks:
+  jtb-network:
