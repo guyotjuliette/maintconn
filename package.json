@@ -15,6 +15,7 @@
     "express": "^5.1.0",
     "mariadb": "^3.4.1",
     "modbus-serial": "^8.0.20-no-serial-port",
+    "mysql2": "^3.14.0",
     "serialport": "^13.0.0"
   }
 }
