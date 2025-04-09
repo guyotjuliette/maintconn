@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard Température Zone 3</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       margin: 0;
@@ -51,6 +52,7 @@
       padding: 25px 40px;
       border-radius: 15px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      margin-bottom: 40px;
     }
 
     form label {
@@ -67,7 +69,7 @@
       margin-top: 5px;
     }
 
-    form button {
+    form button, #cycleBtn {
       margin-top: 15px;
       padding: 10px 20px;
       background-color: #00ffd5;
@@ -78,8 +80,13 @@
       cursor: pointer;
     }
 
-    form button:hover {
+    form button:hover, #cycleBtn:hover {
       background-color: #00c9a7;
+    }
+
+    canvas {
+      max-width: 800px;
+      margin-bottom: 30px;
     }
 
     footer {
@@ -91,8 +98,7 @@
   </style>
 </head>
 <body>
-    <!-- Bouton de navigation (à placer juste après <body>) -->
-<div style="position: absolute; top: 20px; right: 30px;">
+  <div style="position: absolute; top: 20px; right: 30px;">
     <button onclick="location.href='FrontEnd/dashboard.html'" style="
       padding: 10px 20px;
       background-color: #00ffd5;
@@ -106,7 +112,7 @@
       ➜ Page Dashboard
     </button>
   </div>
-  
+
   <h1>Contrôle température - Zone 3</h1>
 
   <div class="card">
@@ -115,20 +121,15 @@
   </div>
 
   <form id="seuilForm">
-    <label>Seuil très bas :
-      <input type="number" name="tres_bas" required />
-    </label>
-    <label>Seuil bas :
-      <input type="number" name="bas" required />
-    </label>
-    <label>Seuil haut :
-      <input type="number" name="haut" required />
-    </label>
-    <label>Seuil très haut :
-      <input type="number" name="tres_haut" required />
-    </label>
+    <label>Seuil très bas : <input type="number" name="tres_bas" required /></label>
+    <label>Seuil bas : <input type="number" name="bas" required /></label>
+    <label>Seuil haut : <input type="number" name="haut" required /></label>
+    <label>Seuil très haut : <input type="number" name="tres_haut" required /></label>
     <button type="submit">Mettre à jour les seuils</button>
   </form>
+
+  <canvas id="temperatureChart"></canvas>
+  <button id="cycleBtn">Afficher le cycle actuel</button>
 
   <footer>Dashboard connecté au serveur Express</footer>
 
@@ -137,11 +138,8 @@
       try {
         const response = await fetch("http://localhost:3000/variable");
         const data = await response.json();
-
-        // suppose que la dernière température est la plus récente (premier élément)
         const last = data[0];
         const temp = last?.temp ?? "--";
-
         const tempElem = document.getElementById("temperature");
         const statusElem = document.getElementById("status");
 
@@ -229,6 +227,55 @@
     });
 
     chargerSeuils();
+
+    async function renderChart() {
+      try {
+        const res = await fetch("http://localhost:3000/variable");
+        const data = await res.json();
+
+        const labels = data.map(d => new Date(d.date_heure).toLocaleTimeString());
+        const values = data.map(d => d.temp);
+
+        const ctx = document.getElementById('temperatureChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Température (°C)',
+              data: values,
+              borderColor: '#00ffd5',
+              backgroundColor: 'rgba(0,255,213,0.2)',
+              fill: true,
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      } catch (err) {
+        console.error("Erreur lors du chargement du graphique", err);
+      }
+    }
+
+    renderChart();
+
+    document.getElementById("cycleBtn").addEventListener("click", async () => {
+      try {
+        const res = await fetch("http://localhost:3000/variable");
+        const data = await res.json();
+        const cycle = data[0]?.cycle;
+        alert(`Cycle actuel : ${cycle}`);
+      } catch (err) {
+        alert("Erreur lors de la récupération du cycle");
+      }
+    });
   </script>
 </body>
 </html>
