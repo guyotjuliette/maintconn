@@ -1,0 +1,1456 @@
+[
+    {
+        "id": "6dc25dcd4c2a9c5e",
+        "type": "tab",
+        "label": "Flux 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ab62c53b04cebbc0",
+        "type": "tab",
+        "label": "Flux 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e9eafe46dca8816a",
+        "type": "tab",
+        "label": "TP final - Maintenance Connectée",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1a402b6ade6b37ae",
+        "type": "subflow",
+        "name": "VariableName (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 240,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "5f0995e3a7254451"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 540,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "5f0995e3a7254451",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "VariableName",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "Type",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-align-justify",
+                    "label": {
+                        "en-US": "Type"
+                    },
+                    "type": "select",
+                    "opts": {
+                        "opts": [
+                            {
+                                "l": {
+                                    "en-US": "String"
+                                },
+                                "v": "String"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "Boolean"
+                                },
+                                "v": "Boolean"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "Int16"
+                                },
+                                "v": "Int16"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "Int32"
+                                },
+                                "v": "Int32"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "Float"
+                                },
+                                "v": "Float"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "Double"
+                                },
+                                "v": "Double"
+                            }
+                        ]
+                    }
+                }
+            }
+        ],
+        "color": "#00FF00",
+        "icon": "font-awesome/fa-arrow-right"
+    },
+    {
+        "id": "e4517c09.ae2a9",
+        "type": "subflow",
+        "name": "AOA3D (7)",
+        "info": "",
+        "category": "Schneider Electric",
+        "in": [
+            {
+                "x": 160,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "487230b1.ed791"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 480,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "487230b1.ed791",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "color": "#00FF00",
+        "icon": "font-awesome/fa-arrows"
+    },
+    {
+        "id": "241b1ceb141421de",
+        "type": "group",
+        "z": "e9eafe46dca8816a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "75bfa24838e7d604",
+            "56549d7d43893789",
+            "http-in-seuilTresHaut",
+            "extract-seuilTresHaut",
+            "http-response-seuilTresHaut",
+            "cd7f6cc17df285ac",
+            "7739c5012ed2dd0a"
+        ],
+        "x": 34,
+        "y": 239,
+        "w": 942,
+        "h": 202
+    },
+    {
+        "id": "7f574b6b7c025e2d",
+        "type": "group",
+        "z": "e9eafe46dca8816a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "1249baea4daaa808",
+            "dba324a53621adcd",
+            "66bc344b78175ff9",
+            "af733511ae4f4420",
+            "e5fb2686df6ec31d",
+            "d8f143ed6dc6812b",
+            "8ad0e9a4549ac2a4"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 1272,
+        "h": 202
+    },
+    {
+        "id": "c4ec0214fc3d024c",
+        "type": "group",
+        "z": "e9eafe46dca8816a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "fbd92e1462ced1d1",
+            "98bdce12da5bc594",
+            "http-in-seuilHaut",
+            "extract-seuilHaut",
+            "http-response-seuilHaut",
+            "e58d1a1a759a4a3c",
+            "8f3a35b091894020"
+        ],
+        "x": 34,
+        "y": 459,
+        "w": 952,
+        "h": 202
+    },
+    {
+        "id": "63f9ed1b9596567a",
+        "type": "group",
+        "z": "e9eafe46dca8816a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "396b0bfcc44e3601",
+            "http-in-seuilBas",
+            "extract-seuilBas",
+            "http-response-seuilBas",
+            "891c6b4cf5321c08",
+            "398d0b8b0964afe5",
+            "4ef01a5f892808df"
+        ],
+        "x": 34,
+        "y": 679,
+        "w": 952,
+        "h": 202
+    },
+    {
+        "id": "8ede4b6492f8f2d7",
+        "type": "group",
+        "z": "e9eafe46dca8816a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "12cee6dbc5fa8c4d",
+            "2c614827e4ea406c",
+            "http-in-seuilTresBas",
+            "extract-seuilTresBas",
+            "http-response-seuilTresBas",
+            "aa16d90c30a71c95",
+            "c72a4870d6529774"
+        ],
+        "x": 34,
+        "y": 899,
+        "w": 962,
+        "h": 222
+    },
+    {
+        "id": "21545583ca1e50d3",
+        "type": "modbus-client",
+        "name": "APIZ3",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "172.16.1.23",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "f5e05f52ac6141dc",
+        "type": "modbus-client",
+        "name": "APIZ4",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "172.16.1.25",
+        "tcpPort": 502,
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": 9600,
+        "serialDatabits": 8,
+        "serialStopbits": 1,
+        "serialParity": "none",
+        "serialConnectionDelay": 100,
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "modbus-server",
+        "type": "modbus-client",
+        "name": "Automate",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "tcpHost": "192.168.0.10",
+        "tcpPort": "502",
+        "unit_id": 1,
+        "reconnectOnTimeout": true
+    },
+    {
+        "id": "5f0995e3a7254451",
+        "type": "function",
+        "z": "1a402b6ade6b37ae",
+        "name": "VariableName",
+        "func": "var I = msg.payload;\nvar Variable = \"@\"+env.get(\"VariableName\");\nglobal.set(Variable, I);\n//node.warn(Variable + \"  \" + I);\n//node.warn(\"Type \"+env.get(\"Type\"));\nreturn msg; \n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "487230b1.ed791",
+        "type": "function",
+        "z": "e4517c09.ae2a9",
+        "name": "AOA3D",
+        "func": "var S = Object.keys(msg.payload);\n//node.warn(S);\nif (S[0] === \"name\")\n{\n    S[0] = msg.payload.name;\n}\nvar S1 = S[0].split(\",\");\n\n\nnode.warn(S);\n\nvar Sres = \"{\";\nvar i;\nfor(i = 0; i < S1.length; i++)\n{\n    Sres +=  \"\\\"\" + S1[i] +\n            \"\\\":{\\\"quality\\\": \\\"good\\\", \\\"timestamp\\\": 1603469001, \\\"type\\\": \\\"lreal\\\", \\\"value\\\":\\\"\" +\n            global.get(\"@\"+S1[i]) + \"\\\"}\";\n            \n    if (i < S1.length - 1)\n    {\n        Sres += \",\";\n    }\n }\nSres += \"}\";\n//node.warn(Sres);\nmsg.payload = Sres;\nmsg.statusCode = 200;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1249baea4daaa808",
+        "type": "modbus-read",
+        "z": "e9eafe46dca8816a",
+        "g": "7f574b6b7c025e2d",
+        "name": "Température",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "255",
+        "dataType": "HoldingRegister",
+        "adr": "150",
+        "quantity": "1",
+        "rate": "50",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "f5e05f52ac6141dc",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "66bc344b78175ff9"
+            ],
+            [
+                "dba324a53621adcd"
+            ]
+        ]
+    },
+    {
+        "id": "dba324a53621adcd",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "7f574b6b7c025e2d",
+        "name": "TemperatureZone3NonTransfo",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 430,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "66bc344b78175ff9",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "7f574b6b7c025e2d",
+        "name": "Fonction transfo température",
+        "func": "var Temperature = msg.payload / 20;\n\n// On stocke la température dans une variable globale pour y accéder plus tard\nglobal.set(\"temperatureZone3\", Temperature);\n\n// On continue à transmettre la température\nmsg.payload = Temperature;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 60,
+        "wires": [
+            [
+                "af733511ae4f4420"
+            ]
+        ]
+    },
+    {
+        "id": "af733511ae4f4420",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "7f574b6b7c025e2d",
+        "name": "TemperatureZone3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 690,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e5fb2686df6ec31d",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "g": "7f574b6b7c025e2d",
+        "name": "",
+        "url": "/temperatureZone3",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 700,
+        "y": 140,
+        "wires": [
+            [
+                "d8f143ed6dc6812b"
+            ]
+        ]
+    },
+    {
+        "id": "d8f143ed6dc6812b",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "7f574b6b7c025e2d",
+        "name": "function 1",
+        "func": "let temp = global.get(\"temperatureZone3\") || \"--\";\nmsg.payload = temp;  // ou { temperature: temp } si tu veux un objet JSON\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 140,
+        "wires": [
+            [
+                "8ad0e9a4549ac2a4"
+            ]
+        ]
+    },
+    {
+        "id": "8ad0e9a4549ac2a4",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "g": "7f574b6b7c025e2d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1230,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "75bfa24838e7d604",
+        "type": "modbus-read",
+        "z": "e9eafe46dca8816a",
+        "g": "241b1ceb141421de",
+        "name": "Seuil très haut (136)",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "255",
+        "dataType": "HoldingRegister",
+        "adr": "136",
+        "quantity": "1",
+        "rate": "50",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "f5e05f52ac6141dc",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 170,
+        "y": 280,
+        "wires": [
+            [
+                "cd7f6cc17df285ac"
+            ],
+            [
+                "56549d7d43893789"
+            ]
+        ]
+    },
+    {
+        "id": "fbd92e1462ced1d1",
+        "type": "modbus-read",
+        "z": "e9eafe46dca8816a",
+        "g": "c4ec0214fc3d024c",
+        "name": "Seul haut (134)",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "255",
+        "dataType": "HoldingRegister",
+        "adr": "134",
+        "quantity": "1",
+        "rate": "50",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "f5e05f52ac6141dc",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 160,
+        "y": 500,
+        "wires": [
+            [
+                "e58d1a1a759a4a3c"
+            ],
+            [
+                "98bdce12da5bc594"
+            ]
+        ]
+    },
+    {
+        "id": "396b0bfcc44e3601",
+        "type": "modbus-read",
+        "z": "e9eafe46dca8816a",
+        "g": "63f9ed1b9596567a",
+        "name": "Seuil bas (132)",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "255",
+        "dataType": "HoldingRegister",
+        "adr": "132",
+        "quantity": "1",
+        "rate": "50",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "f5e05f52ac6141dc",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 160,
+        "y": 720,
+        "wires": [
+            [
+                "891c6b4cf5321c08"
+            ],
+            [
+                "398d0b8b0964afe5"
+            ]
+        ]
+    },
+    {
+        "id": "12cee6dbc5fa8c4d",
+        "type": "modbus-read",
+        "z": "e9eafe46dca8816a",
+        "g": "8ede4b6492f8f2d7",
+        "name": "Seuil très bas (130)",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "255",
+        "dataType": "HoldingRegister",
+        "adr": "130",
+        "quantity": "1",
+        "rate": "50",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "f5e05f52ac6141dc",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 170,
+        "y": 940,
+        "wires": [
+            [
+                "c72a4870d6529774"
+            ],
+            [
+                "2c614827e4ea406c"
+            ]
+        ]
+    },
+    {
+        "id": "56549d7d43893789",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "241b1ceb141421de",
+        "name": "Seuil TH",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 320,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "98bdce12da5bc594",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "c4ec0214fc3d024c",
+        "name": "Seuil H",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 260,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "2c614827e4ea406c",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "8ede4b6492f8f2d7",
+        "name": "Seuil TB",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 320,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "78a68eb3873fce47",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "url": "/updateSeuilTresBas",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 1200,
+        "wires": [
+            [
+                "420637cd4280e870"
+            ]
+        ]
+    },
+    {
+        "id": "420637cd4280e870",
+        "type": "json",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 1200,
+        "wires": [
+            [
+                "5b8ac68d3604afd1"
+            ]
+        ]
+    },
+    {
+        "id": "5b8ac68d3604afd1",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "name": "Écrire seuilTresBas",
+        "func": "\nmsg.payload = {\n  value: [msg.payload.val],\n  fc: 16,\n  unitid: 1,\n  address: 130,\n  quantity: 1\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 1200,
+        "wires": [
+            [
+                "49d6c032342a34ed"
+            ]
+        ]
+    },
+    {
+        "id": "49d6c032342a34ed",
+        "type": "modbus-write",
+        "z": "e9eafe46dca8816a",
+        "name": "Écriture MW130",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "130",
+        "quantity": "1",
+        "server": "f5e05f52ac6141dc",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 760,
+        "y": 1180,
+        "wires": [
+            [
+                "84e1dde65a96e345"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "84e1dde65a96e345",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "31dd93ef9b3295c2",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "url": "/updateSeuilBas",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 1260,
+        "wires": [
+            [
+                "99182d170e9caa23"
+            ]
+        ]
+    },
+    {
+        "id": "99182d170e9caa23",
+        "type": "json",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 360,
+        "y": 1260,
+        "wires": [
+            [
+                "44322b656172f1d6"
+            ]
+        ]
+    },
+    {
+        "id": "44322b656172f1d6",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "name": "Écrire seuilBas",
+        "func": "\nmsg.payload = {\n  value: [msg.payload.val],\n  fc: 16,\n  unitid: 1,\n  address: 132,\n  quantity: 1\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 540,
+        "y": 1260,
+        "wires": [
+            [
+                "135f36f6573a3b90"
+            ]
+        ]
+    },
+    {
+        "id": "135f36f6573a3b90",
+        "type": "modbus-write",
+        "z": "e9eafe46dca8816a",
+        "name": "Écriture MW132",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "132",
+        "quantity": "1",
+        "server": "f5e05f52ac6141dc",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 760,
+        "y": 1260,
+        "wires": [
+            [
+                "1b64809fb3404543"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1b64809fb3404543",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "a89a8de54ce89969",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "url": "/updateSeuilHaut",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 1460,
+        "wires": [
+            [
+                "96a9ffb412b9efa6"
+            ]
+        ]
+    },
+    {
+        "id": "96a9ffb412b9efa6",
+        "type": "json",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 1460,
+        "wires": [
+            [
+                "993b4a6787161097"
+            ]
+        ]
+    },
+    {
+        "id": "993b4a6787161097",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "name": "Écrire seuilHaut",
+        "func": "\nmsg.payload = {\n  value: [msg.payload.val],\n  fc: 16,\n  unitid: 1,\n  address: 134,\n  quantity: 1\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 1460,
+        "wires": [
+            [
+                "2ff15366d9595ead"
+            ]
+        ]
+    },
+    {
+        "id": "2ff15366d9595ead",
+        "type": "modbus-write",
+        "z": "e9eafe46dca8816a",
+        "name": "Écriture MW134",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "134",
+        "quantity": "1",
+        "server": "f5e05f52ac6141dc",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 770,
+        "y": 1460,
+        "wires": [
+            [
+                "5b6e00a104c37c1c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "5b6e00a104c37c1c",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "a33d3f355ead119f",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "url": "/updateSeuilTresHaut",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 1360,
+        "wires": [
+            [
+                "96679b495a4852a2"
+            ]
+        ]
+    },
+    {
+        "id": "96679b495a4852a2",
+        "type": "json",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 1360,
+        "wires": [
+            [
+                "bfed23e2aa891170"
+            ]
+        ]
+    },
+    {
+        "id": "bfed23e2aa891170",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "name": "Écrire seuilTresHaut",
+        "func": "\nmsg.payload = {\n  value: [msg.payload.val],\n  fc: 16,\n  unitid: 1,\n  address: 136,\n  quantity: 1\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 540,
+        "y": 1360,
+        "wires": [
+            [
+                "af04a7937d0fe754"
+            ]
+        ]
+    },
+    {
+        "id": "af04a7937d0fe754",
+        "type": "modbus-write",
+        "z": "e9eafe46dca8816a",
+        "name": "Écriture MW136",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "136",
+        "quantity": "1",
+        "server": "f5e05f52ac6141dc",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 760,
+        "y": 1360,
+        "wires": [
+            [
+                "d6a3834e9aba4e1b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d6a3834e9aba4e1b",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "http-in-seuilTresBas",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "g": "8ede4b6492f8f2d7",
+        "name": "",
+        "url": "/getSeuilTresBas",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 1080,
+        "wires": [
+            [
+                "extract-seuilTresBas"
+            ]
+        ]
+    },
+    {
+        "id": "extract-seuilTresBas",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "8ede4b6492f8f2d7",
+        "name": "Extraire valeur MW130",
+        "func": "let temp = global.get(\"seuilTB\") || \"--\";\nmsg.payload = temp;  // ou { temperature: temp } si tu veux un objet JSON\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 1080,
+        "wires": [
+            [
+                "http-response-seuilTresBas"
+            ]
+        ]
+    },
+    {
+        "id": "http-response-seuilTresBas",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "g": "8ede4b6492f8f2d7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 920,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "http-in-seuilBas",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "g": "63f9ed1b9596567a",
+        "name": "",
+        "url": "/getSeuilBas",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 840,
+        "wires": [
+            [
+                "extract-seuilBas"
+            ]
+        ]
+    },
+    {
+        "id": "extract-seuilBas",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "63f9ed1b9596567a",
+        "name": "Extraire valeur MW132",
+        "func": "let temp = global.get(\"seuilB\") || \"--\";\nmsg.payload = temp;  // ou { temperature: temp } si tu veux un objet JSON\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 840,
+        "wires": [
+            [
+                "http-response-seuilBas"
+            ]
+        ]
+    },
+    {
+        "id": "http-response-seuilBas",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "g": "63f9ed1b9596567a",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 910,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "http-in-seuilHaut",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "g": "c4ec0214fc3d024c",
+        "name": "",
+        "url": "/getSeuilHaut",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 620,
+        "wires": [
+            [
+                "extract-seuilHaut"
+            ]
+        ]
+    },
+    {
+        "id": "extract-seuilHaut",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "c4ec0214fc3d024c",
+        "name": "Extraire valeur MW134",
+        "func": "let temp = global.get(\"seuilH\") || \"--\";\nmsg.payload = temp;  // ou { temperature: temp } si tu veux un objet JSON\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 620,
+        "wires": [
+            [
+                "http-response-seuilHaut"
+            ]
+        ]
+    },
+    {
+        "id": "http-response-seuilHaut",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "g": "c4ec0214fc3d024c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 910,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "http-in-seuilTresHaut",
+        "type": "http in",
+        "z": "e9eafe46dca8816a",
+        "g": "241b1ceb141421de",
+        "name": "",
+        "url": "/getSeuilTresHaut",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 240,
+        "y": 400,
+        "wires": [
+            [
+                "extract-seuilTresHaut"
+            ]
+        ]
+    },
+    {
+        "id": "extract-seuilTresHaut",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "241b1ceb141421de",
+        "name": "Extraire valeur MW136",
+        "func": "let temp = global.get(\"seuilTH\") || \"--\";\nmsg.payload = temp;  // ou { temperature: temp } si tu veux un objet JSON\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 400,
+        "wires": [
+            [
+                "http-response-seuilTresHaut"
+            ]
+        ]
+    },
+    {
+        "id": "http-response-seuilTresHaut",
+        "type": "http response",
+        "z": "e9eafe46dca8816a",
+        "g": "241b1ceb141421de",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 900,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "cd7f6cc17df285ac",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "241b1ceb141421de",
+        "name": "Extraire valeur MW136",
+        "func": "var SeuilTH = msg.payload\n\nglobal.set(\"SeuilTH\", SeuilTH);\n\nmsg.payload = SeuilTH;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [
+                "7739c5012ed2dd0a"
+            ]
+        ]
+    },
+    {
+        "id": "7739c5012ed2dd0a",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "241b1ceb141421de",
+        "name": "Seuil TH",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 780,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e58d1a1a759a4a3c",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "c4ec0214fc3d024c",
+        "name": "Extraire valeur MW134",
+        "func": "var SeuilH = msg.payload\n\nglobal.set(\"SeuilH\", SeuilH);\n\nmsg.payload = SeuilH;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 520,
+        "wires": [
+            [
+                "8f3a35b091894020"
+            ]
+        ]
+    },
+    {
+        "id": "8f3a35b091894020",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "c4ec0214fc3d024c",
+        "name": "Seuil H",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 720,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "891c6b4cf5321c08",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "63f9ed1b9596567a",
+        "name": "Extraire valeur MW132",
+        "func": "var SeuilB = msg.payload\n\nglobal.set(\"SeuilB\", SeuilB);\n\nmsg.payload = SeuilB;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 720,
+        "wires": [
+            [
+                "4ef01a5f892808df"
+            ]
+        ]
+    },
+    {
+        "id": "398d0b8b0964afe5",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "63f9ed1b9596567a",
+        "name": "Seuil B",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 354,
+        "y": 782,
+        "wires": []
+    },
+    {
+        "id": "4ef01a5f892808df",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "63f9ed1b9596567a",
+        "name": "Seuil B",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "aa16d90c30a71c95",
+        "type": "debug",
+        "z": "e9eafe46dca8816a",
+        "g": "8ede4b6492f8f2d7",
+        "name": "Seuil TB",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 680,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "c72a4870d6529774",
+        "type": "function",
+        "z": "e9eafe46dca8816a",
+        "g": "8ede4b6492f8f2d7",
+        "name": "Extraire valeur MW130",
+        "func": "var SeuilTB = msg.payload\n\nglobal.set(\"SeuilTB\", SeuilTB);\n\nmsg.payload = SeuilTB;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 940,
+        "wires": [
+            [
+                "aa16d90c30a71c95"
+            ]
+        ]
+    }
+]
