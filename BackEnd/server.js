@@ -37,41 +37,48 @@ testConnection();
 
 // Lecture cyclique des variables depuis l'automate
 async function scheduleVariableTracking() {
+  const IP_FIXE = '172.16.1.23'; // ← IP fixe de ton automate
+
   try {
     const conn = await db.getConnection();
+
+    // Récupérer toutes les variables avec leur adresse et fréquence
     const variables = await conn.query("SELECT * FROM variable");
 
     for (const variable of variables) {
-      const { id_mesure, Adresse_Mot, IP, Fréquence } = variable;
+      const { Adresse_Mot, Fréquence } = variable;
 
       setInterval(async () => {
         try {
-          await client.connectTCP(IP, { port: 502 }); // à changer parce que c'est pas le bon 
-          client.setID(1); // à adapter si nécessaire
+          // Connexion à l'automate (une seule IP pour tous)
+          await client.connectTCP(IP_FIXE, { port: 502 });
+          client.setID(1);
 
+          // Lecture des données (holding register)
           const data = await client.readHoldingRegisters(parseInt(Adresse_Mot), 1);
           const valeur = data.data[0];
-
           const now = new Date();
+
+          // Insertion dans la table variable
           await conn.query(
-            'INSERT INTO variable (date_heure, temp, cycle) VALUES (?, ?, ?)',
-            [now, valeur, null] // cycle peut être remplacé si tu veux mettre autre chose
+            "INSERT INTO variable (date_heure, temp, cycle, Adresse_Mot, Fréquence) VALUES (?, ?, ?, ?, ?)",
+            [now, valeur, null, Adresse_Mot, Fréquence]
           );
 
-          console.log(`[${now.toISOString()}] Valeur lue depuis ${IP} @${Adresse_Mot} : ${valeur}`);
+          console.log(`[${now.toISOString()}] Température lue @${Adresse_Mot} : ${valeur}`);
         } catch (error) {
-          console.error(`Erreur de lecture pour ${IP} @${Adresse_Mot} :`, error.message);
+          console.error(`Erreur de lecture @${Adresse_Mot} :`, error.message);
         }
       }, Fréquence * 1000); // Fréquence en secondes
     }
 
     conn.release();
   } catch (error) {
-    console.error("Erreur pendant l'initialisation du suivi des variables :", error.message);
+    console.error("Erreur lors de la planification des suivis :", error.message);
   }
 }
-scheduleVariableTracking();
 
+scheduleVariableTracking();
 
 // ======================== ALARME ========================
 app.post('/alarme', async (req, res) => {
