@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Exécuter le script wait-for-it.sh pour attendre que la base de données soit prête avant de démarrer le backend
-CMD ["nodemon", "--legacy-watch", "serveur.js"]
+CMD ["nodemon", "--legacy-watch", "server.js"]
